@@ -3,7 +3,7 @@
       <h1>Повар</h1>
       <button class="btn approve_button" @click="logout">Выйти</button>
     <ul>
-      <li v-for="(cook, index) in cooks" :key="cook.id">
+      <li v-for="(cook, index) in undoneOrders" :key="cook.id">
         {{ cook.table }} - {{ cook.status }} - {{ cook.price }} -
         {{ cook.shift_workers }} - {{ cook.create_at }} -
         <button @click="changeStatus(cook.id, index)">Change</button>
@@ -44,6 +44,11 @@ export default {
     async logout(){
         this.$router.push('/')
         const res = await this.$store.dispatch('logoutAsync', this.$store.getters.getToken)
+    }
+  },
+  computed:{
+    undoneOrders(){
+      return this.cooks.filter(cook => cook.status !== "Готово")
     }
   },
   async mounted() {
