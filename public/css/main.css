@@ -158,3 +158,87 @@
        font-size: 36pt;
    }
    
+
+/* modal */
+
+.modal {
+    display: flex;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    margin: auto;
+}
+
+form > h2, form label {
+    color: white;
+    font-weight: bold;
+}
+
+form > h2 {
+    font-size: 24pt;
+    margin-bottom: 25px;
+    display: flex;
+    justify-content: center;
+}
+
+form > div {
+    display: flex;
+    flex-direction: row;
+    margin: 20px 25px;
+    font-size: 16pt;
+}
+
+form label,
+form input,
+form select,
+form button {
+    display: flex;
+    flex: 1;
+}
+
+form input, form select {
+    font-size: inherit;
+    border-radius: 5px;
+    padding-left: 3px;
+}
+
+#photo_file {
+    color: transparent;
+}
+
+#photo_file::-webkit-file-upload-button {
+    visibility: hidden;
+}
+
+form > div:nth-child(5) {
+    margin-bottom: 0;
+}
+
+form > div:nth-child(6) {
+    margin-top: 0;
+}
+
+#photo_file:before {
+    content: "Фото сотрудника";
+    color: black;
+    display: flex;
+    justify-content: center;
+    background: white;
+    border: 2px solid #999;
+    border-radius: 5px;
+    padding: 3px 0;
+    cursor: pointer;
+}
+
+form button {
+    padding: 10px 10px;
+    margin: 15px;
+    display: flex;
+    justify-content: center;
+    color: white;
+    border-radius: 5px;
+    font-size: inherit;
+    cursor: pointer;
+}
