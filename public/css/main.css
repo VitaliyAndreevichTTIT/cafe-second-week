@@ -212,13 +212,13 @@ form input, form select {
     visibility: hidden;
 }
 
-form > div:nth-child(5) {
+/* form > div:nth-child(5) {
     margin-bottom: 0;
 }
 
 form > div:nth-child(6) {
     margin-top: 0;
-}
+} */
 
 #photo_file:before {
     content: "Фото сотрудника";

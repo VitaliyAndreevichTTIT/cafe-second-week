@@ -6,6 +6,9 @@ Vue.use(Vuex)
 export default new Vuex.Store({
     state: {
         token: '',
+        employees: [],
+        orders: [],
+        shifts: []
     },
     mutations: {
         setToken: (state, token) => {
@@ -14,7 +17,7 @@ export default new Vuex.Store({
         }
     },
     actions: {
-        async fetchLoginAsync(context, personData) {
+        async fetchLoginAsync({ commit }, personData) {
             const res = await fetch(process.env.VUE_APP_SECOND_URL + 'api-cafe/login', {
                 method: 'POST',
                 body: JSON.stringify(personData),
@@ -24,11 +27,14 @@ export default new Vuex.Store({
             })
                 .then(response => response.json())
                 .then(result => result)
-                .catch(error => console.log(error))
+                .catch(error => {
+                    commit('setToken', '')
+                    console.log(error)
+                })
 
-            context.commit('setToken', res.data.user_token)
+            commit('setToken', res.data.user_token)
         },
-        async getCooksAsync(context, token) {
+        async getCooksAsync({ commit }, token) {
             const res = await fetch(process.env.VUE_APP_SECOND_URL + 'api-cafe/order/taken/get', {
                 method: 'GET',
                 headers: {
@@ -38,6 +44,10 @@ export default new Vuex.Store({
             })
                 .then(response => response.json())
                 .then(result => (result.data))
+                .catch(error => {
+                    commit('setToken', '')
+                    console.log(error)
+                })
             return res;
         },
         async changeStatusAsync({ commit }, { id, status, token }) {
@@ -52,10 +62,13 @@ export default new Vuex.Store({
             })
                 .then(response => response.json())
                 .then(result => (result.data))
-                .catch(error => console.log(error))
+                .catch(error => {
+                    commit('setToken', '')
+                    console.log(error)
+                })
             return res;
         },
-        async logoutAsync(context, token) {
+        async logoutAsync({ commit }, token) {
             const res = await fetch(process.env.VUE_APP_SECOND_URL + 'api-cafe/logout', {
                 method: 'GET',
                 headers: {
@@ -64,9 +77,12 @@ export default new Vuex.Store({
             })
                 .then(response => response.json())
                 .then(result => (result))
-                .catch(error => console.log('Error', error))
+                .catch(error => {
+                    commit('setToken', '')
+                    console.log(error)
+                })
             localStorage.myApiCafeToken = ""
-            context.commit('setToken', '')
+            commit('setToken', '')
             return res;
         },
         async getUsersAsync({ commit }, token) {
@@ -78,15 +94,18 @@ export default new Vuex.Store({
             })
                 .then(response => response.json())
                 .then(result => (result))
-                .catch(error => console.log('Error', error))
+                .catch(error => {
+                    commit('setToken', '')
+                    console.log(error)
+                })
             return res.data;
         },
         async setNewEmployeeAsync({ commit }, form) {
-           
+
             const res = await fetch(process.env.VUE_APP_SECOND_URL + 'api-cafe/user', {
                 method: 'POST',
                 body: JSON.stringify({
-                    name: form.name.value, 
+                    name: form.name.value,
                     surname: form.surname.value,
                     patronymic: form.patronymic.value,
                     login: form.login.value,
@@ -100,7 +119,10 @@ export default new Vuex.Store({
             })
                 .then(response => response.json())
                 .then(result => console.log(result))
-                .catch(error => console.log(error))
+                .catch(error => {
+                    commit('setToken', '')
+                    console.log(error)
+                })
         }
     },
     modules: {},

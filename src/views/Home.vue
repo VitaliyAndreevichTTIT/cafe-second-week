@@ -10,7 +10,6 @@
       </nav>
     </header>
     <main></main>
-    <Footer />
   </div>
 </template>
 
