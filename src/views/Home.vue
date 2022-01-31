@@ -1,6 +1,6 @@
 <template>
-  <div class="wrapper">
-    <Modal v-if="modalOpen"></Modal>
+  <div>
+    <Modal v-if="modalOpen" @cancelLogin="modalOpen = !modalOpen"></Modal>
     <header>
       <article>
         <img src="../assets/logo.png" alt="logo" />

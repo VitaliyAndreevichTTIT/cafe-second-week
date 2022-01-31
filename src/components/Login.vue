@@ -17,7 +17,7 @@
       </div>
       <div>
         <button class="approve_button" type="submit">Отправить</button>
-        <button class="cancel_button">Отмена</button>
+        <button class="cancel_button" @click.prevent="$emit('cancelLogin')">Отмена</button>
       </div>
     </form>
   </article>
@@ -35,6 +35,7 @@ export default {
   },
   methods: {
     async fetchLogin() {
+      if(!this.login && !this.password) return
       const personData = {
         login: this.login,
         password: this.password,
