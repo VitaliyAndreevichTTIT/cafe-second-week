@@ -5,15 +5,16 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
     state: {
-        token: ''
+        token: '',
     },
     mutations: {
-        setToken(state, token) {
-            state.token = token;
-        },
+        setToken: (state, token) => {
+            state.token = token
+            localStorage.myApiCafeToken = token
+        }
     },
     actions: {
-        async fetchLogin(context, personData) {
+        async fetchLoginAsync(context, personData) {
             const res = await fetch(process.env.VUE_APP_SECOND_URL + 'api-cafe/login', {
                 method: 'POST',
                 body: JSON.stringify(personData),
@@ -24,7 +25,7 @@ export default new Vuex.Store({
                 .then(response => response.json())
                 .then(result => result)
                 .catch(error => console.log(error))
-
+            
             context.commit('setToken', res.data.user_token)
         },
         async getCooks(context, token) {
@@ -32,22 +33,21 @@ export default new Vuex.Store({
                 method: 'GET',
                 headers: {
                     'Content-Type': 'application/json',
-                    "Authorization": "Bearer " + token
+                    "Authorization": "Bearer " + (token || localStorage.myApiCafeToken)
                 }
             })
                 .then(response => response.json())
                 .then(result => (result.data))
-            console.log(res);
             return res;
         },
-        async changeStatus(context, { id, status, token }) {
+        async changeStatus({commit}, { id, status, token }) {
             const patchStatus = JSON.stringify({ status })
             const res = await fetch(process.env.VUE_APP_SECOND_URL + `api-cafe/order/${id}/change-status`, {
                 method: 'PATCH',
                 body: patchStatus,
                 headers: {
                     'Content-Type': 'application/json',
-                    "Authorization": "Bearer " + token
+                    "Authorization": "Bearer " + (token || localStorage.myApiCafeToken)
                 },
             })
                 .then(response => response.json())
@@ -59,21 +59,19 @@ export default new Vuex.Store({
             const res = await fetch(process.env.VUE_APP_SECOND_URL + 'api-cafe/logout', {
                 method: 'GET',
                 headers: {
-                    "Authorization": "Bearer " + token
+                    "Authorization": "Bearer " + (token || localStorage.myApiCafeToken)
                 },
             })
                 .then(response => response.json())
                 .then(result => (result))
                 .catch(error => console.log('Error', error))
-
+            localStorage.myApiCafeToken = ""
             context.commit('setToken', '')
             return res;
         }
     },
     modules: {},
     getters: {
-        getToken: state => {
-            return state.token
-        }
+        getToken: state => (state.token)
     }
 })

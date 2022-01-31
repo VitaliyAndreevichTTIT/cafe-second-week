@@ -39,7 +39,7 @@ export default {
         login: this.login,
         password: this.password,
       };
-      await this.$store.dispatch("fetchLogin", personData);
+      await this.$store.dispatch("fetchLoginAsync", personData);
       this.login = "";
       this.password = "";
       if (this.$store.getters.getToken) this.$router.push("/cook");
