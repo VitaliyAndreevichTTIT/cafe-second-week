@@ -28,7 +28,7 @@ export default new Vuex.Store({
             
             context.commit('setToken', res.data.user_token)
         },
-        async getCooks(context, token) {
+        async getCooksAsync(context, token) {
             const res = await fetch(process.env.VUE_APP_SECOND_URL + 'api-cafe/order/taken/get', {
                 method: 'GET',
                 headers: {
@@ -40,7 +40,7 @@ export default new Vuex.Store({
                 .then(result => (result.data))
             return res;
         },
-        async changeStatus({commit}, { id, status, token }) {
+        async changeStatusAsync({commit}, { id, status, token }) {
             const patchStatus = JSON.stringify({ status })
             const res = await fetch(process.env.VUE_APP_SECOND_URL + `api-cafe/order/${id}/change-status`, {
                 method: 'PATCH',
@@ -68,6 +68,19 @@ export default new Vuex.Store({
             localStorage.myApiCafeToken = ""
             context.commit('setToken', '')
             return res;
+        },
+        async getUsersAsync({commit}, token){
+            const res = await fetch(process.env.VUE_APP_SECOND_URL + 'api-cafe/user', {
+                method: 'GET',
+                headers: {
+                    "Authorization": "Bearer " + (token || localStorage.myApiCafeToken)
+                }
+            })
+            .then(response => response.json())
+            .then(result => (result))
+            .catch(error => console.log('Error', error))
+            console.log(res.data);
+            return res.data;
         }
     },
     modules: {},

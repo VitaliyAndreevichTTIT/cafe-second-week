@@ -42,7 +42,10 @@ export default {
       await this.$store.dispatch("fetchLoginAsync", personData);
       this.login = "";
       this.password = "";
-      if (this.$store.getters.getToken) this.$router.push("/cook");
+      if (this.$store.getters.getToken) {
+        if (personData.login === "cook") this.$router.push("/cook");
+        else if (personData.login === "admin") this.$router.push("/admin");
+      }
     },
   },
 };

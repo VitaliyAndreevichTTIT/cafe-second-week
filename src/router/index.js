@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import store from "../store/index.js"
+// import store from "../store/index.js"
 import Home from '../views/Home.vue'
 
 Vue.use(VueRouter)
@@ -15,6 +15,14 @@ const routes = [{
     name: 'Cook',
     component: function () {
         return import('../views/Cook.vue')
+    },
+}
+,
+{
+    path: '/admin',
+    name: 'Admin',
+    component: function () {
+        return import('../views/Admin.vue')
     },
 }
 ]

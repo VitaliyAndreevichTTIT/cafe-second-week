@@ -28,7 +28,7 @@ export default {
     async changeStatus(cook) {
       
        const status = cook.status === "Принят" ?  "preparing" : "ready";
-       await this.$store.dispatch("changeStatus", {
+       await this.$store.dispatch("changeStatusAsync", {
               id: cook.id,
               status,
               token: this.$store.getters.getToken,
@@ -38,7 +38,7 @@ export default {
     },
     async getOrders() {
       const res = await this.$store.dispatch(
-        "getCooks",
+        "getCooksAsync",
         this.$store.getters.getToken || localStorage.myApiCafeToken
       );
       this.cooks = res;
