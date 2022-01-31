@@ -1,14 +1,26 @@
 <template>
   <div class="cook">
-    <h1>Повар</h1>
-    <button class="btn approve_button" @click="logout">Выйти</button>
-    <ul>
-      <li v-for="cook in undoneOrders" :key="cook.id">
-        {{ cook.table }} - {{ cook.status }} - {{ cook.price }} -
-        {{ cook.shift_workers }} - {{ cook.create_at }} -
-        <button @click="changeStatus(cook)">Change</button>
-      </li>
-    </ul>
+    <header>
+      <article>
+        <img src="../assets/logo.png" alt="logo" />
+      </article>
+      <nav>
+        <a href="#" class="cancel_button" @click.prevent="logout">Выйти</a>
+      </nav>
+    </header>
+    <section class="employees">
+      <article class="card">
+        <div v-for="cook in undoneOrders" :key="cook.id">
+          <span>Имя: </span>
+          <span>{{ cook.table }}</span>
+          <span>Статус: </span>
+          <span class="working">{{ cook.status }}</span>
+          <span>Должность: </span>
+          <span>{{ cook.shift_workers }}</span>
+          <button @click="changeStatus(cook)">Изменить</button>
+        </div>
+      </article>
+    </section>
   </div>
 </template>
 
@@ -26,14 +38,13 @@ export default {
   },
   methods: {
     async changeStatus(cook) {
-      
-       const status = cook.status === "Принят" ?  "preparing" : "ready";
-       await this.$store.dispatch("changeStatusAsync", {
-              id: cook.id,
-              status,
-              token: this.$store.getters.getToken,
-            })
-          
+      const status = cook.status === "Принят" ? "preparing" : "ready";
+      await this.$store.dispatch("changeStatusAsync", {
+        id: cook.id,
+        status,
+        token: this.$store.getters.getToken,
+      });
+
       await this.getOrders();
     },
     async getOrders() {
@@ -61,17 +72,3 @@ export default {
   },
 };
 </script>
-
-<style>
-.btn {
-  cursor: pointer;
-  width: 5rem;
-  height: 2rem;
-  border-radius: 5px;
-}
-
-.cook {
-  width: min(700px, 90%);
-  margin: 20px auto;
-}
-</style>

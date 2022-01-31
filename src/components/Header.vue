@@ -5,6 +5,7 @@
     </article>
     <nav>
       <a href="#">Сотрудники</a>
+      <a href="#">Добавить</a>
       <a href="#">Смены</a>
       <a href="#">Заказы</a>
       <a href="#" class="cancel_button" @click="logout">Выход</a>

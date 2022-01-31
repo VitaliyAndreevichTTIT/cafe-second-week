@@ -25,7 +25,7 @@ export default new Vuex.Store({
                 .then(response => response.json())
                 .then(result => result)
                 .catch(error => console.log(error))
-            
+
             context.commit('setToken', res.data.user_token)
         },
         async getCooksAsync(context, token) {
@@ -40,7 +40,7 @@ export default new Vuex.Store({
                 .then(result => (result.data))
             return res;
         },
-        async changeStatusAsync({commit}, { id, status, token }) {
+        async changeStatusAsync({ commit }, { id, status, token }) {
             const patchStatus = JSON.stringify({ status })
             const res = await fetch(process.env.VUE_APP_SECOND_URL + `api-cafe/order/${id}/change-status`, {
                 method: 'PATCH',
@@ -69,18 +69,38 @@ export default new Vuex.Store({
             context.commit('setToken', '')
             return res;
         },
-        async getUsersAsync({commit}, token){
+        async getUsersAsync({ commit }, token) {
             const res = await fetch(process.env.VUE_APP_SECOND_URL + 'api-cafe/user', {
                 method: 'GET',
                 headers: {
                     "Authorization": "Bearer " + (token || localStorage.myApiCafeToken)
                 }
             })
-            .then(response => response.json())
-            .then(result => (result))
-            .catch(error => console.log('Error', error))
-            console.log(res.data);
+                .then(response => response.json())
+                .then(result => (result))
+                .catch(error => console.log('Error', error))
             return res.data;
+        },
+        async setNewEmployeeAsync({ commit }, form) {
+           
+            const res = await fetch(process.env.VUE_APP_SECOND_URL + 'api-cafe/user', {
+                method: 'POST',
+                body: JSON.stringify({
+                    name: form.name.value, 
+                    surname: form.surname.value,
+                    patronymic: form.patronymic.value,
+                    login: form.login.value,
+                    password: form.password.value,
+                    role_id: +form.role_id.value
+                }),
+                headers: {
+                    'Content-Type': 'application/json',
+                    "Authorization": "Bearer " + (localStorage.myApiCafeToken)
+                }
+            })
+                .then(response => response.json())
+                .then(result => console.log(result))
+                .catch(error => console.log(error))
         }
     },
     modules: {},
