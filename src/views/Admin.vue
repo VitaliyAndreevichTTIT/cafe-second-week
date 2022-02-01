@@ -10,25 +10,16 @@
         <img src="../assets/logo.png" alt="logo" />
       </article>
       <nav>
-        <a href="#">Сотрудники</a>
+        <router-link to="/admin/employees">Сотрудники</router-link>
+        <!-- <a href="#">Сотрудники</a> -->
         <a href="#" @click.prevent="toggleModal = !toggleModal">Добавить</a>
         <a href="#" @click="toggleShit = !toggleShit">Смены</a>
-        <a href="#">Заказы</a>
+         <router-link to="/admin/shifts">Заказы</router-link>
         <a href="#" class="cancel_button" @click="logout">Выйти</a>
       </nav>
     </header>
-    <section class="employees">
-      <article class="card">
-        <div v-for="user in users" :key="user.id">
-          <span>Имя: </span><span>{{ user.name }}</span> <span>Статус: </span
-          ><span :class="user.status">{{
-            convertEmployeeStatus[user.status]
-          }}</span>
-          <span>Должность: </span><span>{{ user.group }}</span>
-          <button>Подробнее</button>
-        </div>
-      </article>
-    </section>
+    <router-view></router-view>
+    <!-- <Employees/> -->
     <section class="shift"></section>
     <section class="orders"></section>
   </main>
@@ -37,6 +28,7 @@
 <script>
 import NewEmployeeModal from "../components/NewEmployee.vue";
 import NewShift from "../components/NewShift.vue";
+// import Employees from "../components/Employees.vue";
 
 export default {
   name: "Admin",
@@ -45,10 +37,6 @@ export default {
       users: [],
       toggleModal: false,
       toggleShit: false,
-      convertEmployeeStatus: {
-        working: "Работает",
-        fired: "Уволен",
-      },
     };
   },
   methods: {
@@ -57,12 +45,10 @@ export default {
       await this.$store.dispatch("logoutAsync", this.$store.getters.getToken);
     },
   },
-  components: { NewEmployeeModal, NewShift },
-  async mounted() {
-    this.users = await this.$store.dispatch(
-      "getUsersAsync",
-      this.$store.getters.getToken
-    );
+  components: {
+    NewEmployeeModal,
+    NewShift,
+    // Employees
   },
 };
 </script>

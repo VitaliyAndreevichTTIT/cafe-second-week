@@ -125,9 +125,7 @@ export default new Vuex.Store({
                 })
         },
         async setShiftAsync({ commit }, dates) {
-            console.log("Dates", dates);
             const body = JSON.stringify(dates)
-            console.log("JSON Dates", body);
             const res = await fetch(process.env.VUE_APP_SECOND_URL + 'api-cafe/work-shift', {
                 method: 'POST',
                 headers: {
@@ -137,15 +135,59 @@ export default new Vuex.Store({
                 body
             })
                 .then(response => response.json())
-                .then(result => (console.log(result)))
+                .then(result => (result))
                 .catch(error => {
                     commit('setToken', '')
                     console.log(error)
                 })
 
-                console.log("shift fetch", res);
-                return res;
-        }
+            return res;
+        },
+        async openShiftAsync({ commit }, id) {
+            const res = await fetch(process.env.VUE_APP_SECOND_URL + `api-cafe/work-shift/${id}/open`, {
+                method: 'GET',
+                headers: {
+                    "Authorization": "Bearer " + localStorage.myApiCafeToken
+                },
+            })
+                .then(response => response.json())
+                .then(result => (result))
+                .catch(error => {
+                    commit('setToken', '')
+                    console.log(error)
+                })
+            return res
+        },
+        async closeShiftAsync({ commit }, id) {
+            const res = await fetch(process.env.VUE_APP_SECOND_URL + `api-cafe/work-shift/${id}/close`, {
+                method: 'GET',
+                headers: {
+                    "Authorization": "Bearer " + localStorage.myApiCafeToken
+                },
+            })
+                .then(response => response.json())
+                .then(result => console.log(result))
+                .catch(error => {
+                    commit('setToken', '')
+                    console.log(error)
+                })
+            return res
+        },
+        async getShiftsAsync({ commit }, token) {
+            const res = await fetch(process.env.VUE_APP_SECOND_URL + 'api-cafe/work-shift', {
+                method: 'GET',
+                headers: {
+                    "Authorization": "Bearer " + (token || localStorage.myApiCafeToken)
+                }
+            })
+                .then(response => response.json())
+                .then(result => (result))
+                .catch(error => {
+                    commit('setToken', '')
+                    console.log(error)
+                })
+            return res;
+        },
     },
     modules: {},
     getters: {

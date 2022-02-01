@@ -45,7 +45,7 @@ export default {
       this.password = "";
       if (this.$store.getters.getToken) {
         if (personData.login === "cook") this.$router.push("/cook");
-        else if (personData.login === "admin") this.$router.push("/admin");
+        else if (personData.login === "admin" || personData.login === "John1") this.$router.push("/admin");
       }
     },
   },

@@ -60,10 +60,10 @@ export default {
         !this.endShiftTime
       )
         return;
-    
-      this.$store.dispatch("setShiftAsync", {
+
+      const res = this.$store.dispatch("setShiftAsync", {
         start: this.startShift + " " + this.startShiftTime,
-        end: this.endShift + " " + this.endShiftTime
+        end: this.endShift + " " + this.endShiftTime,
       });
       this.$emit("cancelShift");
     },
