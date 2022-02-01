@@ -1,6 +1,10 @@
 <template>
   <main>
-    <NewEmployeeModal v-if="toggleModal" @cancelLogin="toggleModal = !toggleModal"/>
+    <NewEmployeeModal
+      v-if="toggleModal"
+      @cancelLogin="toggleModal = !toggleModal"
+    />
+    <NewShift v-if="toggleShit" @cancelShift="toggleShit = !toggleShit" />
     <header>
       <article>
         <img src="../assets/logo.png" alt="logo" />
@@ -8,7 +12,7 @@
       <nav>
         <a href="#">Сотрудники</a>
         <a href="#" @click.prevent="toggleModal = !toggleModal">Добавить</a>
-        <a href="#">Смены</a>
+        <a href="#" @click="toggleShit = !toggleShit">Смены</a>
         <a href="#">Заказы</a>
         <a href="#" class="cancel_button" @click="logout">Выйти</a>
       </nav>
@@ -17,7 +21,9 @@
       <article class="card">
         <div v-for="user in users" :key="user.id">
           <span>Имя: </span><span>{{ user.name }}</span> <span>Статус: </span
-          ><span :class="user.status">{{ convertEmployeeStatus[user.status] }}</span>
+          ><span :class="user.status">{{
+            convertEmployeeStatus[user.status]
+          }}</span>
           <span>Должность: </span><span>{{ user.group }}</span>
           <button>Подробнее</button>
         </div>
@@ -30,6 +36,7 @@
 
 <script>
 import NewEmployeeModal from "../components/NewEmployee.vue";
+import NewShift from "../components/NewShift.vue";
 
 export default {
   name: "Admin",
@@ -37,29 +44,26 @@ export default {
     return {
       users: [],
       toggleModal: false,
-      convertEmployeeStatus:{
+      toggleShit: false,
+      convertEmployeeStatus: {
         working: "Работает",
-        fired: "Уволен"
-      }
+        fired: "Уволен",
+      },
     };
   },
-  methods:{
-    async logout(){
-     this.$router.push("/");
-      await this.$store.dispatch(
-        "logoutAsync",
-        this.$store.getters.getToken
-      );
-  }
+  methods: {
+    async logout() {
+      this.$router.push("/");
+      await this.$store.dispatch("logoutAsync", this.$store.getters.getToken);
+    },
   },
-  components: { NewEmployeeModal },
+  components: { NewEmployeeModal, NewShift },
   async mounted() {
     this.users = await this.$store.dispatch(
       "getUsersAsync",
       this.$store.getters.getToken
     );
   },
-  
 };
 </script>
 
