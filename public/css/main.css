@@ -1,163 +1,178 @@
 @font-face {
     font-family: Winston;
-       src: url("fonts/Winston-Regular.ttf");
-   }
-   @font-face {
+    src: url("fonts/Winston-Regular.ttf");
+}
+
+@font-face {
     font-family: Winston;
-       src: url("fonts/Winston-Bold.ttf");
-       font-weight: bold;
-   }
-   @font-face {
+    src: url("fonts/Winston-Bold.ttf");
+    font-weight: bold;
+}
+
+@font-face {
     font-family: Winston;
-       src: url("fonts/Winston-Italic.ttf");
-       font-style: italic;
-   }
-   
-   * {
-       margin: 0;
-       padding: 0;
-       outline: none;
-       font-family: Winston, serif;
-       user-select: none;
-   }
-   
-   .wrapper {
-       max-width: 1600px;
-       min-height: 100vh;
-       margin: 0 auto;
-       display: flex;
-       flex-direction: column;
-   }
-   
-   a {
-       color: #fff;
-       text-decoration: none;
-   }
-   
-   .modal {
-       position: fixed;
-       min-width: 100vw;
-       min-height: 100vh;
-       background: rgba(0, 95, 182, 0.95);
-       z-index: 100;
-   }
-   
-   /* header section */
-   header {
-       position: sticky;
-       width: calc(100% - 50px);
-       display: flex;
-       justify-content: space-between;
-       align-items: center;
-       margin-bottom: 15px;
-       padding: 25px;
-       border-bottom: 1px solid #005fb6;
-   }
-   
-   header > nav {
-       width: 100%;
-       display: flex;
-       justify-content: space-around;
-       align-items: center;
-       margin-left: 50px;
-   }
-   header > nav > a {
-       border: 1px solid #005fb6;
-       border-radius: 15px;
-       padding: 15px 20px;
-       font-size: 18pt;
-       font-weight: bold;
-       background: rgba(75, 152, 224, 0.8);
-       filter: drop-shadow(0 0 2px #005fb6);
-       min-width: 150px;
-       display: flex;
-       justify-content: center;
-   }
-   
-   .approve_button {
-       background: rgba(108, 201, 15, 0.8);
-   }
-   .cancel_button {
-       background: #ad0d0d;
-   }
-   header img {
-       width: 250px;
-       filter: drop-shadow(0 0 3px #005fb6);
-   }
-   
-   /* employees */
-   .employees > :first-child {
-       display: flex;
-       flex-direction: column;
-   }
-   .employees > :first-child > div {
-       display: flex;
-       justify-content: space-between;
-       padding: 15px 75px;
-       border-bottom: 1px solid #005fb6;
-       min-width: 200px;
-   }
-   
-   .employees > :first-child > div:nth-child(2n) {
-       background-color: rgba(75, 152, 224, 0.8);
-   }
-   
-   
-   .employees > :first-child > div > span {
-       font-size: 18pt;
-   }
-   
-   .employees > :first-child > div > span:nth-child(4) {
-       display: flex;
-       justify-content: center;
-       align-self: center;
-   }
-   
-   .employees > :first-child > div > span:nth-child(2n) {
-       font-weight: bold;
-   }
-   
-   .working {
-       background: rgba(108, 201, 15, 0.8);
-   }
-   
-   .fired {
-       background: #ad0d0d;
-   }
-   
-   .employees > :first-child > div > :last-child {
-       width: 150px;
-       border: 1px solid #005fb6;
-       border-radius: 10px;
-       padding: 10px;
-       font-size: 16pt;
-       font-weight: bold;
-       background-color: rgba(75, 152, 224, 0.8);
-       color: white;
-       cursor: pointer;
-   }
-   /* shift */
-   
-   /* orders */
-   
-   /* footer */
-   footer {
-       margin-top: auto;
-       display: flex;
-       justify-content: space-around;
-       align-items: center;
-       padding: 10px 0 10px;
-       font-size: 18pt;
-       background: #005fb6;
-   }
-   
-   footer > article {
-       color: #fff;
-   }
-   footer > article:last-child {
-       font-size: 36pt;
-   }
-   
+    src: url("fonts/Winston-Italic.ttf");
+    font-style: italic;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    outline: none;
+    font-family: Winston, serif;
+    user-select: none;
+}
+
+.wrapper {
+    max-width: 1600px;
+    min-height: 100vh;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+}
+
+a {
+    color: #fff;
+    text-decoration: none;
+}
+
+.modal {
+    position: fixed;
+    width: min(1600px, 100vw);
+    min-height: 100vh;
+    background: rgba(0, 95, 182, 0.95);
+    z-index: 100;
+}
+
+
+/* header section */
+
+header {
+    position: sticky;
+    width: calc(100% - 50px);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+    padding: 25px;
+    border-bottom: 1px solid #005fb6;
+}
+
+header>nav {
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    margin-left: 50px;
+}
+
+header>nav>a {
+    border: 1px solid #005fb6;
+    border-radius: 15px;
+    padding: 15px 20px;
+    font-size: 18pt;
+    font-weight: bold;
+    background: rgba(75, 152, 224, 0.8);
+    filter: drop-shadow(0 0 2px #005fb6);
+    min-width: 150px;
+    display: flex;
+    justify-content: center;
+}
+
+.approve_button {
+    background: rgba(108, 201, 15, 0.8);
+}
+
+.cancel_button {
+    background: #ad0d0d;
+}
+
+header img {
+    width: 250px;
+    filter: drop-shadow(0 0 3px #005fb6);
+}
+
+
+/* employees */
+
+.employees> :first-child {
+    display: flex;
+    flex-direction: column;
+}
+
+.employees> :first-child>div {
+    display: flex;
+    justify-content: space-between;
+    padding: 15px 75px;
+    border-bottom: 1px solid #005fb6;
+    min-width: 200px;
+}
+
+.employees> :first-child>div:nth-child(2n) {
+    background-color: rgba(75, 152, 224, 0.8);
+}
+
+.employees> :first-child>div>span {
+    font-size: 18pt;
+}
+
+.employees> :first-child>div>span:nth-child(4) {
+    display: flex;
+    justify-content: center;
+    align-self: center;
+}
+
+.employees> :first-child>div>span:nth-child(2n) {
+    font-weight: bold;
+}
+
+.working {
+    background: rgba(108, 201, 15, 0.8);
+}
+
+.fired {
+    background: #ad0d0d;
+}
+
+.employees> :first-child>div> :last-child {
+    width: 150px;
+    border: 1px solid #005fb6;
+    border-radius: 10px;
+    padding: 10px;
+    font-size: 16pt;
+    font-weight: bold;
+    background-color: rgba(75, 152, 224, 0.8);
+    color: white;
+    cursor: pointer;
+}
+
+
+/* shift */
+
+
+/* orders */
+
+
+/* footer */
+
+footer {
+    margin-top: auto;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding: 10px 0 10px;
+    font-size: 18pt;
+    background: #005fb6;
+}
+
+footer>article {
+    color: #fff;
+}
+
+footer>article:last-child {
+    font-size: 36pt;
+}
+
 
 /* modal */
 
@@ -171,19 +186,20 @@ form {
     margin: auto;
 }
 
-form > h2, form label {
+form>h2,
+form label {
     color: white;
     font-weight: bold;
 }
 
-form > h2 {
+form>h2 {
     font-size: 24pt;
     margin-bottom: 25px;
     display: flex;
     justify-content: center;
 }
 
-form > div {
+form>div {
     display: flex;
     flex-direction: row;
     margin: 20px 25px;
@@ -198,7 +214,8 @@ form button {
     flex: 1;
 }
 
-form input, form select {
+form input,
+form select {
     font-size: inherit;
     border-radius: 5px;
     padding-left: 3px;
@@ -211,6 +228,7 @@ form input, form select {
 #photo_file::-webkit-file-upload-button {
     visibility: hidden;
 }
+
 
 /* form > div:nth-child(5) {
     margin-bottom: 0;

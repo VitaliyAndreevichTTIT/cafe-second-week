@@ -123,6 +123,23 @@ export default new Vuex.Store({
                     commit('setToken', '')
                     console.log(error)
                 })
+        },
+        async setShiftAsync({ commit }, dates) {
+            const body = JSON.parse(dates)
+            return await fetch(process.env.VUE_APP_SECOND_URL + 'api-cafe/work-shift', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    "Authorization": "Bearer " + (localStorage.myApiCafeToken)
+                },
+                body
+            })
+                .then(response => response.json())
+                .then(result => (result))
+                .catch(error => {
+                    commit('setToken', '')
+                    console.log(error)
+                })
         }
     },
     modules: {},
