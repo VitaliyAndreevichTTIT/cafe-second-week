@@ -14,7 +14,29 @@ export default new Vuex.Store({
         setToken: (state, token) => {
             state.token = token
             localStorage.myApiCafeToken = token
-        }
+        },
+        setEmployees: (state, employees) => {   // TODO: test
+            state.employees = employees
+        },
+        editEployees: (state, employee) => {    // TODO: test
+            const employeeIndex = state.employees.indexOf(employee)
+            Vue.set(state.employees, employeeIndex, employee)
+        },
+        setOrders: (state, orders) => {         // TODO: test
+            state.orders = orders
+        },
+        editOrders: (state, order) => {         // TODO: test
+            const orderIndex = state.orders.indexOf(order)
+            Vue.set(state.orders, orderIndex, order)
+        },   
+        setShifts: (state, shifts) => {         // TODO: test
+            state.shifts = shifts
+        },
+        editShifts: (state, shift) => {         // TODO: test
+            const shiftIndex = state.shifts.indexOf(shift)
+            Vue.set(state.shifts, shiftIndex, shift)
+        },
+
     },
     actions: {
         async fetchLoginAsync({ commit }, personData) {
@@ -191,6 +213,10 @@ export default new Vuex.Store({
     },
     modules: {},
     getters: {
-        getToken: state => (state.token)
+        getToken: state => (state.token),
+        getEmployees: state => (state.employees),
+        getWorkingEmployees: state => (state.employees.filter(emp => emp.status !== "fired")),
+        getOrders: state => (state.orders),
+        getShifts: state => (state.shifts)
     }
 })

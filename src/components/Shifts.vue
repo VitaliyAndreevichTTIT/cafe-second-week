@@ -5,8 +5,8 @@
         <span>Начало: </span><span>{{ shift.start }}</span> <span>Конец: </span
         ><span>{{ shift.end }}</span> <span>Активна: </span
         ><span>{{ shift.active }}</span>
-        <button style="width: 9em" @click="activeShift(shift)">
-          Активировать
+        <button style="width: 9.3em" @click="activeShift(shift)">
+          {{ shift.active === 0 ? "Активировать" : "Деактивировать"}}
         </button>
       </div>
     </article>
