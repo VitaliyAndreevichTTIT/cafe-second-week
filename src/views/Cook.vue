@@ -49,7 +49,7 @@ export default {
     },
     async getOrders() {
       const res = await this.$store.dispatch(
-        "getCooksAsync",
+        "getOrdersAsync",
         this.$store.getters.getToken || localStorage.myApiCafeToken
       );
       this.cooks = res;

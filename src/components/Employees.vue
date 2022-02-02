@@ -22,11 +22,15 @@ export default {
         working: "Работает",
         fired: "Уволен",
       },
-      eployees: [],
     };
   },
+  computed:{
+    eployees() {
+      return this.$store.getters.getEmployees;  
+    } 
+  },
   async mounted() {
-    this.eployees = await this.$store.dispatch(
+    await this.$store.dispatch(
       "getUsersAsync",
       this.$store.getters.getToken
     );

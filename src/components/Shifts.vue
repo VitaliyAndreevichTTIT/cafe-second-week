@@ -3,10 +3,9 @@
     <article class="card">
       <div v-for="shift in shifts" :key="shift.id">
         <span>Начало: </span><span>{{ shift.start }}</span> <span>Конец: </span
-        ><span>{{ shift.end }}</span> <span>Активна: </span
-        ><span>{{ shift.active }}</span>
+        ><span>{{ shift.end }}</span> 
         <button style="width: 9.3em" @click="activeShift(shift)">
-          {{ shift.active === 0 ? "Активировать" : "Деактивировать"}}
+          {{ !shift.active ? "Активировать" : "Деактивировать"}}
         </button>
       </div>
     </article>
@@ -16,20 +15,20 @@
 <script>
 export default {
   name: "Shifts",
-  data() {
-    return {
-      shifts: [],
-    };
-  },
   methods: {
     async activeShift(shift) {
-        shift.active === 0
+        (!shift.active)
           ? await this.$store.dispatch("openShiftAsync", shift.id)
           : await this.$store.dispatch("closeShiftAsync", shift.id);
     },
   },
+  computed:{
+    shifts(){
+      return this.$store.getters.getShifts
+    }
+  },
   async mounted() {
-    this.shifts = await this.$store.dispatch(
+    await this.$store.dispatch(
       "getShiftsAsync",
       this.$store.getters.getToken
     );
@@ -37,4 +36,5 @@ export default {
 };
 </script>
 
-<style></style>
+<style>
+</style>
