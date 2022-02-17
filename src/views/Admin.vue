@@ -11,7 +11,6 @@
       </article>
       <nav>
         <router-link to="/admin/employees">Сотрудники</router-link>
-        <!-- <a href="#">Сотрудники</a> -->
         <a href="#" @click.prevent="toggleModal = !toggleModal">Добавить</a>
         <a href="#" @click="toggleShit = !toggleShit">Смены</a>
          <router-link to="/admin/shifts">Заказы</router-link>

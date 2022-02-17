@@ -4,13 +4,20 @@
       <h2>Авторизация</h2>
       <div>
         <label for="login_enter">Логин</label>
-        <input type="text" v-model="login" name="login" id="login_enter" />
+        <input
+          type="text"
+          v-model="login"
+          :placeholder="errors.login"
+          name="login"
+          id="login_enter"
+        />
       </div>
       <div>
         <label for="password_enter">Пароль</label>
         <input
           type="password"
           v-model="password"
+          :placeholder="errors.password"
           name="password"
           id="password_enter"
         />
@@ -30,24 +37,39 @@ export default {
     return {
       login: "",
       password: "",
-      errors: [],
+      error: "field cannot be empty",
+      errors: {
+        login: "",
+        password: ""
+      }
     };
   },
   methods: {
     async fetchLogin() {
-      if(!this.login && !this.password) return
+      if (!this.login || !this.password) {
+        !this.login ? (this.errors.login = this.error) : "";
+        !this.password ? (this.errors.password = this.error) : "";
+        return;
+      }
       const personData = {
         login: this.login,
-        password: this.password,
+        password: this.password
       };
       await this.$store.dispatch("fetchLoginAsync", personData);
       this.login = "";
       this.password = "";
-      if (this.$store.getters.getToken) {
+      if (localStorage.myApiCafeToken) {
         if (personData.login === "cook") this.$router.push("/cook");
-        else if (personData.login === "admin" || personData.login === "John1") this.$router.push("/admin/employees");
+        else if (personData.login === "admin" || personData.login === "John1")
+          this.$router.push("/admin/employees");
       }
-    },
-  },
+    }
+  }
 };
 </script>
+
+<style scoped>
+form input::placeholder {
+  color: red;
+}
+</style>

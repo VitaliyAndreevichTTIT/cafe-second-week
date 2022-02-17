@@ -6,41 +6,45 @@ import Home from '../views/Home.vue'
 Vue.use(VueRouter)
 
 const routes = [{
-    path: '/',
-    name: 'Home',
-    component: Home
-},
-{
-    path: '/cook',
-    name: 'Cook',
-    component: function () {
-        return import('../views/Cook.vue')
+        path: '/',
+        name: 'Home',
+        component: Home
     },
-}
-    ,
-{
-    path: '/admin',
-    name: 'Admin',
-    component: function () {
-        return import('../views/Admin.vue')
-    },
-    children:[
-        {
-            path: '/admin/employees',
-            name: 'Employees',
-            component: function () {
-                return import('../components/Employees.vue')
-            }
+    {
+        path: '/cook',
+        name: 'Cook',
+        component: function() {
+            return import ('../views/Cook.vue')
         },
-        {
-            path: '/admin/shifts',
-            name: 'Shifts',
-            component: function () {
-                return import('../components/Shifts.vue')
+    },
+    {
+        path: '/admin',
+        name: 'Admin',
+        component: function() {
+            return import ('../views/Admin.vue')
+        },
+        children: [{
+                path: '/admin/employees',
+                name: 'Employees',
+                component: function() {
+                    return import ('../components/Employees.vue')
+                }
+            },
+            {
+                path: '/admin/shifts',
+                name: 'Shifts',
+                component: function() {
+                    return import ('../components/Shifts.vue')
+                }
             }
-        }
-    ]
-}
+        ]
+    },
+    {
+        path: '/test',
+        name: 'Test',
+        component: () => (
+            import ('../components/Employee.vue'))
+    },
 ]
 
 const router = new VueRouter({

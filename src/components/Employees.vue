@@ -1,7 +1,7 @@
 <template>
   <section class="employees">
     <article class="card">
-      <div v-for="eployee in eployees" :key="eployee.id">
+      <div v-for="eployee in $store.getters.getEmployees" :key="eployee.id">
         <span>Имя: </span><span>{{ eployee.name }}</span> <span>Статус: </span
         ><span :class="eployee.status">{{
           convertEmployeeStatus[eployee.status]
@@ -23,11 +23,6 @@ export default {
         fired: "Уволен",
       },
     };
-  },
-  computed:{
-    eployees() {
-      return this.$store.getters.getEmployees;  
-    } 
   },
   async mounted() {
     await this.$store.dispatch(
